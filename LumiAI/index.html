@@ -39,6 +39,72 @@
             padding: 0 15px;
         }
         
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(10, 14, 23, 0.9);
+            border-radius: 8px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .language-btn {
+            background: transparent;
+            color: var(--text);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(10, 14, 23, 0.95);
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 5px;
+            min-width: 150px;
+            display: none;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .language-option:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        .language-option.active {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--primary);
+        }
+        
         /* Navigation */
         header {
             background-color: rgba(10, 14, 23, 0.9);
@@ -878,10 +944,49 @@
             .carousel-slide {
                 height: 300px;
             }
+            
+            .language-selector {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17630380718"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-17630380718');
+    </script>
 </head>
 <body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn" id="languageBtn">
+            <i class="fas fa-globe"></i>
+            <span id="currentLanguage">English</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" data-lang="en">
+                <i class="fas fa-check"></i>
+                <span>English</span>
+            </div>
+            <div class="language-option" data-lang="es">
+                <span>Español</span>
+            </div>
+            <div class="language-option" data-lang="fr">
+                <span>Français</span>
+            </div>
+            <div class="language-option" data-lang="pt">
+                <span>Português</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <header>
         <div class="container">
@@ -891,12 +996,12 @@
                     <div class="logo-text">Lumi AI</div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#app">App Info</a></li>
-                    <li><a href="#process">Testing Process</a></li>
-                    <li><a href="#incentives">Rewards</a></li>
-                    <li><a href="#security">Security</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#app" data-i18n="nav.app">App Info</a></li>
+                    <li><a href="#process" data-i18n="nav.process">Testing Process</a></li>
+                    <li><a href="#incentives" data-i18n="nav.rewards">Rewards</a></li>
+                    <li><a href="#security" data-i18n="nav.security">Security</a></li>
+                    <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
                 </ul>
                 <div class="mobile-menu">☰</div>
             </nav>
@@ -907,33 +1012,33 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Join Lumi AI Software Tester Program</h1>
-                <p>Experience next-gen AI technology, participate in distributed computing tests, and earn exclusive rewards</p>
+                <h1 data-i18n="hero.title">Join Lumi AI Software Tester Program</h1>
+                <p data-i18n="hero.subtitle">Experience next-gen AI technology, participate in distributed computing tests, and earn exclusive rewards</p>
                 
                 <div class="hero-benefits">
                     <div class="benefit">
                         <i class="fas fa-globe"></i>
-                        <span>Join from anywhere, worldwide</span>
+                        <span data-i18n="hero.benefit1">Join from anywhere, worldwide</span>
                     </div>
                     <div class="benefit">
                         <i class="fas fa-mobile-alt"></i>
-                        <span>Download & test to earn rewards</span>
+                        <span data-i18n="hero.benefit2">Download & test to earn rewards</span>
                     </div>
                     <div class="benefit">
                         <i class="fas fa-shield-alt"></i>
-                        <span>100% secure & Google Play approved</span>
+                        <span data-i18n="hero.benefit3">100% secure & Google Play approved</span>
                     </div>
                 </div>
                 
-                <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="btn download-btn" target="_blank">
-                    <i class="fab fa-google-play"></i> Download Now & Start Earning
+                <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="btn download-btn" target="_blank" onclick="return gtag_report_conversion('https://play.google.com/store/apps/details?id=com.lumiai.tools')">
+                    <i class="fab fa-google-play"></i> <span data-i18n="hero.downloadBtn">Download Now & Start Earning</span>
                 </a>
                 
                 <div class="disclaimer">
-                    <i class="fas fa-info-circle"></i> This is a software testing program, not an investment plan. Rewards are based on participation and testing contributions.
+                    <i class="fas fa-info-circle"></i> <span data-i18n="hero.disclaimer">This is a software testing program, not an investment plan. Rewards are based on participation and testing contributions.</span>
                 </div>
                 
-                <p style="margin-top: 1rem; color: var(--accent); font-weight: 600;">Limited spots available - Join today!</p>
+                <p style="margin-top: 1rem; color: var(--accent); font-weight: 600;" data-i18n="hero.urgency">Limited spots available - Join today!</p>
             </div>
         </div>
     </section>
@@ -942,8 +1047,8 @@
     <section class="app-info" id="app">
         <div class="container">
             <div class="section-title">
-                <h2>About Lumi AI Testing Platform</h2>
-                <p>Revolutionary AI computing platform that lets you experience cutting-edge distributed AI technology</p>
+                <h2 data-i18n="appInfo.title">About Lumi AI Testing Platform</h2>
+                <p data-i18n="appInfo.subtitle">Revolutionary AI computing platform that lets you experience cutting-edge distributed AI technology</p>
             </div>
             <div class="app-details">
                 <div class="carousel-container">
@@ -970,9 +1075,9 @@
                         <div class="indicator"></div>
                     </div>
                     <div class="carousel-download">
-                        <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="play-btn download-btn" target="_blank">
+                        <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="play-btn download-btn" target="_blank" onclick="return gtag_report_conversion('https://play.google.com/store/apps/details?id=com.lumiai.tools')">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-                            <span>Download from Google Play</span>
+                            <span data-i18n="appInfo.downloadBtn">Download from Google Play</span>
                         </a>
                     </div>
                 </div>
@@ -980,29 +1085,29 @@
                     <div class="feature">
                         <div class="feature-icon"><i class="fas fa-share-alt"></i></div>
                         <div class="feature-content">
-                            <h3>Distributed AI Computing Tests</h3>
-                            <p>Participate in next-generation distributed AI model testing, experience cutting-edge technology with no complex operations required.</p>
+                            <h3 data-i18n="appInfo.feature1.title">Distributed AI Computing Tests</h3>
+                            <p data-i18n="appInfo.feature1.desc">Participate in next-generation distributed AI model testing, experience cutting-edge technology with no complex operations required.</p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
                         <div class="feature-content">
-                            <h3>Performance Optimization Testing</h3>
-                            <p>Test AI computing performance across different devices to help us optimize algorithm efficiency and enhance user experience.</p>
+                            <h3 data-i18n="appInfo.feature2.title">Performance Optimization Testing</h3>
+                            <p data-i18n="appInfo.feature2.desc">Test AI computing performance across different devices to help us optimize algorithm efficiency and enhance user experience.</p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="feature-icon"><i class="fas fa-lock"></i></div>
                         <div class="feature-content">
-                            <h3>Privacy & Security Testing</h3>
-                            <p>Test application data security mechanisms, verify privacy protection measures to ensure user data safety.</p>
+                            <h3 data-i18n="appInfo.feature3.title">Privacy & Security Testing</h3>
+                            <p data-i18n="appInfo.feature3.desc">Test application data security mechanisms, verify privacy protection measures to ensure user data safety.</p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="feature-icon"><i class="fas fa-bug"></i></div>
                         <div class="feature-content">
-                            <h3>Functionality Stability Testing</h3>
-                            <p>Test stability of various features, discover and report potential issues to help us perfect our product.</p>
+                            <h3 data-i18n="appInfo.feature4.title">Functionality Stability Testing</h3>
+                            <p data-i18n="appInfo.feature4.desc">Test stability of various features, discover and report potential issues to help us perfect our product.</p>
                         </div>
                     </div>
                 </div>
@@ -1014,29 +1119,29 @@
     <section class="recruitment-process" id="process">
         <div class="container">
             <div class="section-title">
-                <h2>Join Our Testing Program in 4 Simple Steps</h2>
-                <p>Start experiencing cutting-edge AI technology and earning rewards in just minutes</p>
+                <h2 data-i18n="process.title">Join Our Testing Program in 4 Simple Steps</h2>
+                <p data-i18n="process.subtitle">Start experiencing cutting-edge AI technology and earning rewards in just minutes</p>
             </div>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Download App</h3>
-                    <p>Download Lumi AI testing app for free via Google Play Store</p>
+                    <h3 data-i18n="process.step1.title">Download App</h3>
+                    <p data-i18n="process.step1.desc">Download Lumi AI testing app for free via Google Play Store</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Register Account</h3>
-                    <p>Complete simple registration in the app to join AI software testing program</p>
+                    <h3 data-i18n="process.step2.title">Register Account</h3>
+                    <p data-i18n="process.step2.desc">Complete simple registration in the app to join AI software testing program</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Participate in Testing</h3>
-                    <p>Experience various features according to testing guidelines and record results</p>
+                    <h3 data-i18n="process.step3.title">Participate in Testing</h3>
+                    <p data-i18n="process.step3.desc">Experience various features according to testing guidelines and record results</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Earn Rewards</h3>
-                    <p>Complete testing tasks to earn exclusive rewards and premium feature access</p>
+                    <h3 data-i18n="process.step4.title">Earn Rewards</h3>
+                    <p data-i18n="process.step4.desc">Complete testing tasks to earn exclusive rewards and premium feature access</p>
                 </div>
             </div>
         </div>
@@ -1046,24 +1151,24 @@
     <section class="incentives" id="incentives">
         <div class="container">
             <div class="section-title">
-                <h2>Exclusive Testing Rewards</h2>
-                <p>Participate in software testing and earn exclusive incentives and privileges</p>
+                <h2 data-i18n="incentives.title">Exclusive Testing Rewards</h2>
+                <p data-i18n="incentives.subtitle">Participate in software testing and earn exclusive incentives and privileges</p>
             </div>
             <div class="incentive-cards">
                 <div class="incentive-card">
                     <div class="incentive-icon"><i class="fas fa-star"></i></div>
-                    <h3>Testing Achievement Badges</h3>
-                    <p>Complete different testing phases to earn exclusive achievement badges showcasing your testing contributions.</p>
+                    <h3 data-i18n="incentives.card1.title">Testing Achievement Badges</h3>
+                    <p data-i18n="incentives.card1.desc">Complete different testing phases to earn exclusive achievement badges showcasing your testing contributions.</p>
                 </div>
                 <div class="incentive-card">
                     <div class="incentive-icon"><i class="fas fa-unlock"></i></div>
-                    <h3>Premium Feature Access</h3>
-                    <p>Get priority access to platform premium features and experience the latest AI technology.</p>
+                    <h3 data-i18n="incentives.card2.title">Premium Feature Access</h3>
+                    <p data-i18n="incentives.card2.desc">Get priority access to platform premium features and experience the latest AI technology.</p>
                 </div>
                 <div class="incentive-card">
                     <div class="incentive-icon"><i class="fas fa-trophy"></i></div>
-                    <h3>Testing Contribution Ranking</h3>
-                    <p>Earn contribution ranking based on testing quality and quantity to become a top tester.</p>
+                    <h3 data-i18n="incentives.card3.title">Testing Contribution Ranking</h3>
+                    <p data-i18n="incentives.card3.desc">Earn contribution ranking based on testing quality and quantity to become a top tester.</p>
                 </div>
             </div>
         </div>
@@ -1073,24 +1178,24 @@
     <section class="security" id="security">
         <div class="container">
             <div class="section-title">
-                <h2>Security & Reliability Guarantee</h2>
-                <p>Your safety and privacy are our top priorities</p>
+                <h2 data-i18n="security.title">Security & Reliability Guarantee</h2>
+                <p data-i18n="security.subtitle">Your safety and privacy are our top priorities</p>
             </div>
             <div class="security-badges">
                 <div class="badge">
                     <div class="badge-icon"><i class="fab fa-google-play"></i></div>
-                    <h3>Google Play Approved</h3>
-                    <p>App has passed Google's strict review process ensuring no malicious code</p>
+                    <h3 data-i18n="security.badge1.title">Google Play Approved</h3>
+                    <p data-i18n="security.badge1.desc">App has passed Google's strict review process ensuring no malicious code</p>
                 </div>
                 <div class="badge">
                     <div class="badge-icon"><i class="fas fa-user-shield"></i></div>
-                    <h3>Data Privacy Protection</h3>
-                    <p>No user data collection, strict adherence to data privacy policies</p>
+                    <h3 data-i18n="security.badge2.title">Data Privacy Protection</h3>
+                    <p data-i18n="security.badge2.desc">No user data collection, strict adherence to data privacy policies</p>
                 </div>
                 <div class="badge">
                     <div class="badge-icon"><i class="fas fa-lock"></i></div>
-                    <h3>Testing Data Encryption</h3>
-                    <p>All testing data transmission is encrypted ensuring information security</p>
+                    <h3 data-i18n="security.badge3.title">Testing Data Encryption</h3>
+                    <p data-i18n="security.badge3.desc">All testing data transmission is encrypted ensuring information security</p>
                 </div>
             </div>
         </div>
@@ -1100,53 +1205,53 @@
     <section class="faq" id="faq">
         <div class="container">
             <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Common questions about our AI software testing program</p>
+                <h2 data-i18n="faq.title">Frequently Asked Questions</h2>
+                <p data-i18n="faq.subtitle">Common questions about our AI software testing program</p>
             </div>
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>Is the software testing program completely free?</span>
+                        <span data-i18n="faq.q1">Is the software testing program completely free?</span>
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes, the software testing program is completely free. You just need to download the app for free via Google Play Store, register to join the testing program, and start experiencing AI technology while earning rewards.</p>
+                        <p data-i18n="faq.a1">Yes, the software testing program is completely free. You just need to download the app for free via Google Play Store, register to join the testing program, and start experiencing AI technology while earning rewards.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How do I earn testing rewards?</span>
+                        <span data-i18n="faq.q2">How do I earn testing rewards?</span>
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>You can earn testing rewards by completing specified testing tasks. These incentives include exclusive achievement badges, premium feature access, and testing contribution rankings.</p>
+                        <p data-i18n="faq.a2">You can earn testing rewards by completing specified testing tasks. These incentives include exclusive achievement badges, premium feature access, and testing contribution rankings.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>Is the application safe and reliable?</span>
+                        <span data-i18n="faq.q3">Is the application safe and reliable?</span>
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes, Lumi AI has passed Google Play Store's official review and does not collect any user data. We strictly adhere to data privacy policies to protect user information security.</p>
+                        <p data-i18n="faq.a3">Yes, Lumi AI has passed Google Play Store's official review and does not collect any user data. We strictly adhere to data privacy policies to protect user information security.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>What device requirements are needed for software testing?</span>
+                        <span data-i18n="faq.q4">What device requirements are needed for software testing?</span>
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>You only need an Android smartphone to participate. The app is designed to be lightweight, won't excessively consume device resources, and doesn't require background running.</p>
+                        <p data-i18n="faq.a4">You only need an Android smartphone to participate. The app is designed to be lightweight, won't excessively consume device resources, and doesn't require background running.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>How do I join the software testing program?</span>
+                        <span data-i18n="faq.q5">How do I join the software testing program?</span>
                         <span>+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Simply download the Lumi AI app and complete the simple registration within the app to join the software testing program. The registration process is completely free and quick.</p>
+                        <p data-i18n="faq.a5">Simply download the Lumi AI app and complete the simple registration within the app to join the software testing program. The registration process is completely free and quick.</p>
                     </div>
                 </div>
             </div>
@@ -1157,14 +1262,14 @@
     <section class="cta">
         <div class="container">
             <div class="cta-content">
-                <div class="urgency-badge">LIMITED TIME OFFER</div>
-                <h2>Join AI Software Testing Program Today!</h2>
-                <p>Download the app for free, start experiencing cutting-edge AI technology, and earn exclusive testing rewards! Our app is Google approved and 100% secure.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="play-btn download-btn" target="_blank">
+                <div class="urgency-badge" data-i18n="cta.urgency">LIMITED TIME OFFER</div>
+                <h2 data-i18n="cta.title">Join AI Software Testing Program Today!</h2>
+                <p data-i18n="cta.subtitle">Download the app for free, start experiencing cutting-edge AI technology, and earn exclusive testing rewards! Our app is Google approved and 100% secure.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" class="play-btn download-btn" target="_blank" onclick="return gtag_report_conversion('https://play.google.com/store/apps/details?id=com.lumiai.tools')">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-                    <span>Download from Google Play</span>
+                    <span data-i18n="cta.downloadBtn">Download from Google Play</span>
                 </a>
-                <p style="margin-top: 1rem; color: var(--accent); font-weight: 600;">Join thousands of testers worldwide - Don't miss out!</p>
+                <p style="margin-top: 1rem; color: var(--accent); font-weight: 600;" data-i18n="cta.footer">Join thousands of testers worldwide - Don't miss out!</p>
             </div>
         </div>
     </section>
@@ -1176,38 +1281,532 @@
                 <div class="footer-column">
                     <h3>Lumi AI</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#app">App Info</a></li>
-                        <li><a href="#process">Testing Process</a></li>
-                        <li><a href="#incentives">Rewards</a></li>
+                        <li><a href="#home" data-i18n="footer.home">Home</a></li>
+                        <li><a href="#app" data-i18n="footer.app">App Info</a></li>
+                        <li><a href="#process" data-i18n="footer.process">Testing Process</a></li>
+                        <li><a href="#incentives" data-i18n="footer.rewards">Rewards</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Support</h3>
+                    <h3 data-i18n="footer.support">Support</h3>
                     <ul class="footer-links">
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#faq" data-i18n="footer.faq">FAQ</a></li>
+                        <li><a href="#" data-i18n="footer.contact">Contact Us</a></li>
+                        <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+                        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Download App</h3>
+                    <h3 data-i18n="footer.download">Download App</h3>
                     <ul class="footer-links">
-                        <li><a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" target="_blank">Google Play Store</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.lumiai.tools" target="_blank" onclick="return gtag_report_conversion('https://play.google.com/store/apps/details?id=com.lumiai.tools')">Google Play Store</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
                 <p>&copy; 2023 Lumi AI. All rights reserved.</p>
                 <div class="developer-info">
-                    <p>Developer: Theflickson Limited</p>
+                    <p data-i18n="footer.developer">Developer: Theflickson Limited</p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Event snippet for 提交潜在客户表单 conversion page -->
     <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17630380718/OSroCNSi88gbEK6F6dZB',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
+    <script>
+        // Language data
+        const translations = {
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.app": "App Info",
+                "nav.process": "Testing Process",
+                "nav.rewards": "Rewards",
+                "nav.security": "Security",
+                "nav.faq": "FAQ",
+                
+                // Hero Section
+                "hero.title": "Join Lumi AI Software Tester Program",
+                "hero.subtitle": "Experience next-gen AI technology, participate in distributed computing tests, and earn exclusive rewards",
+                "hero.benefit1": "Join from anywhere, worldwide",
+                "hero.benefit2": "Download & test to earn rewards",
+                "hero.benefit3": "100% secure & Google Play approved",
+                "hero.downloadBtn": "Download Now & Start Earning",
+                "hero.disclaimer": "This is a software testing program, not an investment plan. Rewards are based on participation and testing contributions.",
+                "hero.urgency": "Limited spots available - Join today!",
+                
+                // App Info Section
+                "appInfo.title": "About Lumi AI Testing Platform",
+                "appInfo.subtitle": "Revolutionary AI computing platform that lets you experience cutting-edge distributed AI technology",
+                "appInfo.downloadBtn": "Download from Google Play",
+                "appInfo.feature1.title": "Distributed AI Computing Tests",
+                "appInfo.feature1.desc": "Participate in next-generation distributed AI model testing, experience cutting-edge technology with no complex operations required.",
+                "appInfo.feature2.title": "Performance Optimization Testing",
+                "appInfo.feature2.desc": "Test AI computing performance across different devices to help us optimize algorithm efficiency and enhance user experience.",
+                "appInfo.feature3.title": "Privacy & Security Testing",
+                "appInfo.feature3.desc": "Test application data security mechanisms, verify privacy protection measures to ensure user data safety.",
+                "appInfo.feature4.title": "Functionality Stability Testing",
+                "appInfo.feature4.desc": "Test stability of various features, discover and report potential issues to help us perfect our product.",
+                
+                // Testing Process
+                "process.title": "Join Our Testing Program in 4 Simple Steps",
+                "process.subtitle": "Start experiencing cutting-edge AI technology and earning rewards in just minutes",
+                "process.step1.title": "Download App",
+                "process.step1.desc": "Download Lumi AI testing app for free via Google Play Store",
+                "process.step2.title": "Register Account",
+                "process.step2.desc": "Complete simple registration in the app to join AI software testing program",
+                "process.step3.title": "Participate in Testing",
+                "process.step3.desc": "Experience various features according to testing guidelines and record results",
+                "process.step4.title": "Earn Rewards",
+                "process.step4.desc": "Complete testing tasks to earn exclusive rewards and premium feature access",
+                
+                // Test Incentives
+                "incentives.title": "Exclusive Testing Rewards",
+                "incentives.subtitle": "Participate in software testing and earn exclusive incentives and privileges",
+                "incentives.card1.title": "Testing Achievement Badges",
+                "incentives.card1.desc": "Complete different testing phases to earn exclusive achievement badges showcasing your testing contributions.",
+                "incentives.card2.title": "Premium Feature Access",
+                "incentives.card2.desc": "Get priority access to platform premium features and experience the latest AI technology.",
+                "incentives.card3.title": "Testing Contribution Ranking",
+                "incentives.card3.desc": "Earn contribution ranking based on testing quality and quantity to become a top tester.",
+                
+                // Security Section
+                "security.title": "Security & Reliability Guarantee",
+                "security.subtitle": "Your safety and privacy are our top priorities",
+                "security.badge1.title": "Google Play Approved",
+                "security.badge1.desc": "App has passed Google's strict review process ensuring no malicious code",
+                "security.badge2.title": "Data Privacy Protection",
+                "security.badge2.desc": "No user data collection, strict adherence to data privacy policies",
+                "security.badge3.title": "Testing Data Encryption",
+                "security.badge3.desc": "All testing data transmission is encrypted ensuring information security",
+                
+                // FAQ Section
+                "faq.title": "Frequently Asked Questions",
+                "faq.subtitle": "Common questions about our AI software testing program",
+                "faq.q1": "Is the software testing program completely free?",
+                "faq.a1": "Yes, the software testing program is completely free. You just need to download the app for free via Google Play Store, register to join the testing program, and start experiencing AI technology while earning rewards.",
+                "faq.q2": "How do I earn testing rewards?",
+                "faq.a2": "You can earn testing rewards by completing specified testing tasks. These incentives include exclusive achievement badges, premium feature access, and testing contribution rankings.",
+                "faq.q3": "Is the application safe and reliable?",
+                "faq.a3": "Yes, Lumi AI has passed Google Play Store's official review and does not collect any user data. We strictly adhere to data privacy policies to protect user information security.",
+                "faq.q4": "What device requirements are needed for software testing?",
+                "faq.a4": "You only need an Android smartphone to participate. The app is designed to be lightweight, won't excessively consume device resources, and doesn't require background running.",
+                "faq.q5": "How do I join the software testing program?",
+                "faq.a5": "Simply download the Lumi AI app and complete the simple registration within the app to join the software testing program. The registration process is completely free and quick.",
+                
+                // Call to Action
+                "cta.urgency": "LIMITED TIME OFFER",
+                "cta.title": "Join AI Software Testing Program Today!",
+                "cta.subtitle": "Download the app for free, start experiencing cutting-edge AI technology, and earn exclusive testing rewards! Our app is Google approved and 100% secure.",
+                "cta.downloadBtn": "Download from Google Play",
+                "cta.footer": "Join thousands of testers worldwide - Don't miss out!",
+                
+                // Footer
+                "footer.home": "Home",
+                "footer.app": "App Info",
+                "footer.process": "Testing Process",
+                "footer.rewards": "Rewards",
+                "footer.support": "Support",
+                "footer.faq": "FAQ",
+                "footer.contact": "Contact Us",
+                "footer.terms": "Terms of Service",
+                "footer.privacy": "Privacy Policy",
+                "footer.download": "Download App",
+                "footer.developer": "Developer: Theflickson Limited"
+            },
+            es: {
+                // Navigation
+                "nav.home": "Inicio",
+                "nav.app": "Información de la App",
+                "nav.process": "Proceso de Pruebas",
+                "nav.rewards": "Recompensas",
+                "nav.security": "Seguridad",
+                "nav.faq": "Preguntas Frecuentes",
+                
+                // Hero Section
+                "hero.title": "Únete al Programa de Probadores de Software Lumi AI",
+                "hero.subtitle": "Experimenta tecnología IA de última generación, participa en pruebas de computación distribuida y gana recompensas exclusivas",
+                "hero.benefit1": "Únete desde cualquier lugar del mundo",
+                "hero.benefit2": "Descarga y prueba para ganar recompensas",
+                "hero.benefit3": "100% seguro y aprobado por Google Play",
+                "hero.downloadBtn": "Descarga Ahora y Comienza a Ganar",
+                "hero.disclaimer": "Este es un programa de pruebas de software, no un plan de inversión. Las recompensas se basan en la participación y contribuciones en las pruebas.",
+                "hero.urgency": "Plazas limitadas - ¡Únete hoy!",
+                
+                // App Info Section
+                "appInfo.title": "Acerca de la Plataforma de Pruebas Lumi AI",
+                "appInfo.subtitle": "Plataforma revolucionaria de computación IA que te permite experimentar tecnología IA distribuida de vanguardia",
+                "appInfo.downloadBtn": "Descargar desde Google Play",
+                "appInfo.feature1.title": "Pruebas de Computación IA Distribuida",
+                "appInfo.feature1.desc": "Participa en pruebas de modelos IA distribuidos de próxima generación, experimenta tecnología de vanguardia sin operaciones complejas requeridas.",
+                "appInfo.feature2.title": "Pruebas de Optimización de Rendimiento",
+                "appInfo.feature2.desc": "Prueba el rendimiento de computación IA en diferentes dispositivos para ayudarnos a optimizar la eficiencia de algoritmos y mejorar la experiencia del usuario.",
+                "appInfo.feature3.title": "Pruebas de Privacidad y Seguridad",
+                "appInfo.feature3.desc": "Prueba los mecanismos de seguridad de datos de la aplicación, verifica las medidas de protección de privacidad para garantizar la seguridad de los datos del usuario.",
+                "appInfo.feature4.title": "Pruebas de Estabilidad Funcional",
+                "appInfo.feature4.desc": "Prueba la estabilidad de varias funciones, descubre y reporta problemas potenciales para ayudarnos a perfeccionar nuestro producto.",
+                
+                // Testing Process
+                "process.title": "Únete a Nuestro Programa de Pruebas en 4 Pasos Sencillos",
+                "process.subtitle": "Comienza a experimentar tecnología IA de vanguardia y a ganar recompensas en solo minutos",
+                "process.step1.title": "Descarga la App",
+                "process.step1.desc": "Descarga la app de pruebas Lumi AI gratis a través de Google Play Store",
+                "process.step2.title": "Registra tu Cuenta",
+                "process.step2.desc": "Completa el registro simple en la app para unirte al programa de pruebas de software IA",
+                "process.step3.title": "Participa en las Pruebas",
+                "process.step3.desc": "Experimenta varias funciones según las pautas de prueba y registra los resultados",
+                "process.step4.title": "Gana Recompensas",
+                "process.step4.desc": "Completa tareas de prueba para ganar recompensas exclusivas y acceso a funciones premium",
+                
+                // Test Incentives
+                "incentives.title": "Recompensas Exclusivas de Pruebas",
+                "incentives.subtitle": "Participa en pruebas de software y gana incentivos y privilegios exclusivos",
+                "incentives.card1.title": "Insignias de Logro en Pruebas",
+                "incentives.card1.desc": "Completa diferentes fases de prueba para ganar insignias de logro exclusivas que muestren tus contribuciones en pruebas.",
+                "incentives.card2.title": "Acceso a Funciones Premium",
+                "incentives.card2.desc": "Obtén acceso prioritario a funciones premium de la plataforma y experimenta la última tecnología IA.",
+                "incentives.card3.title": "Clasificación por Contribución en Pruebas",
+                "incentives.card3.desc": "Gana clasificación por contribución basada en la calidad y cantidad de pruebas para convertirte en un probador destacado.",
+                
+                // Security Section
+                "security.title": "Garantía de Seguridad y Confiabilidad",
+                "security.subtitle": "Tu seguridad y privacidad son nuestras principales prioridades",
+                "security.badge1.title": "Aprobado por Google Play",
+                "security.badge1.desc": "La aplicación ha pasado el estricto proceso de revisión de Google asegurando que no contiene código malicioso",
+                "security.badge2.title": "Protección de Privacidad de Datos",
+                "security.badge2.desc": "Sin recolección de datos de usuario, estricto cumplimiento de políticas de privacidad de datos",
+                "security.badge3.title": "Cifrado de Datos de Prueba",
+                "security.badge3.desc": "Toda transmisión de datos de prueba está cifrada asegurando la seguridad de la información",
+                
+                // FAQ Section
+                "faq.title": "Preguntas Frecuentes",
+                "faq.subtitle": "Preguntas comunes sobre nuestro programa de pruebas de software IA",
+                "faq.q1": "¿Es completamente gratuito el programa de pruebas de software?",
+                "faq.a1": "Sí, el programa de pruebas de software es completamente gratuito. Solo necesitas descargar la aplicación gratis a través de Google Play Store, registrarte para unirte al programa de pruebas y comenzar a experimentar la tecnología IA mientras ganas recompensas.",
+                "faq.q2": "¿Cómo gano recompensas por las pruebas?",
+                "faq.a2": "Puedes ganar recompensas por pruebas completando tareas de prueba específicas. Estos incentivos incluyen insignias de logro exclusivas, acceso a funciones premium y clasificación por contribución en pruebas.",
+                "faq.q3": "¿Es segura y confiable la aplicación?",
+                "faq.a3": "Sí, Lumi AI ha pasado la revisión oficial de Google Play Store y no recopila ningún dato de usuario. Cumplimos estrictamente con las políticas de privacidad de datos para proteger la seguridad de la información del usuario.",
+                "faq.q4": "¿Qué requisitos de dispositivo se necesitan para las pruebas de software?",
+                "faq.a4": "Solo necesitas un smartphone Android para participar. La aplicación está diseñada para ser liviana, no consumirá excesivamente los recursos del dispositivo y no requiere ejecución en segundo plano.",
+                "faq.q5": "¿Cómo me uno al programa de pruebas de software?",
+                "faq.a5": "Simplemente descarga la aplicación Lumi AI y completa el registro simple dentro de la aplicación para unirte al programa de pruebas de software. El proceso de registro es completamente gratuito y rápido.",
+                
+                // Call to Action
+                "cta.urgency": "OFERTA POR TIEMPO LIMITADO",
+                "cta.title": "¡Únete al Programa de Pruebas de IA Hoy!",
+                "cta.subtitle": "¡Descarga la aplicación gratis, comienza a experimentar tecnología IA de vanguardia y gana recompensas exclusivas por pruebas! Nuestra aplicación está aprobada por Google y es 100% segura.",
+                "cta.downloadBtn": "Descargar desde Google Play",
+                "cta.footer": "Únete a miles de probadores en todo el mundo - ¡No te lo pierdas!",
+                
+                // Footer
+                "footer.home": "Inicio",
+                "footer.app": "Información de la App",
+                "footer.process": "Proceso de Pruebas",
+                "footer.rewards": "Recompensas",
+                "footer.support": "Soporte",
+                "footer.faq": "Preguntas Frecuentes",
+                "footer.contact": "Contáctanos",
+                "footer.terms": "Términos de Servicio",
+                "footer.privacy": "Política de Privacidad",
+                "footer.download": "Descargar App",
+                "footer.developer": "Desarrollador: Theflickson Limited"
+            },
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.app": "Infos App",
+                "nav.process": "Processus de Test",
+                "nav.rewards": "Récompenses",
+                "nav.security": "Sécurité",
+                "nav.faq": "FAQ",
+                
+                // Hero Section
+                "hero.title": "Rejoignez le Programme de Testeurs Lumi AI",
+                "hero.subtitle": "Découvrez la technologie IA de nouvelle génération, participez à des tests de calcul distribué et gagnez des récompenses exclusives",
+                "hero.benefit1": "Rejoignez depuis n'importe où dans le monde",
+                "hero.benefit2": "Téléchargez et testez pour gagner des récompenses",
+                "hero.benefit3": "100% sécurisé et approuvé par Google Play",
+                "hero.downloadBtn": "Téléchargez Maintenant et Commencez à Gagner",
+                "hero.disclaimer": "Ceci est un programme de test logiciel, pas un plan d'investissement. Les récompenses sont basées sur la participation et les contributions aux tests.",
+                "hero.urgency": "Places limitées - Rejoignez-nous aujourd'hui !",
+                
+                // App Info Section
+                "appInfo.title": "À Propos de la Plateforme de Test Lumi AI",
+                "appInfo.subtitle": "Plateforme révolutionnaire de calcul IA qui vous permet d'expérimenter la technologie IA distribuée de pointe",
+                "appInfo.downloadBtn": "Télécharger depuis Google Play",
+                "appInfo.feature1.title": "Tests de Calcul IA Distribué",
+                "appInfo.feature1.desc": "Participez aux tests de modèles IA distribués de nouvelle génération, expérimentez une technologie de pointe sans opérations complexes requises.",
+                "appInfo.feature2.title": "Tests d'Optimisation des Performances",
+                "appInfo.feature2.desc": "Testez les performances de calcul IA sur différents appareils pour nous aider à optimiser l'efficacité des algorithmes et améliorer l'expérience utilisateur.",
+                "appInfo.feature3.title": "Tests de Confidentialité et Sécurité",
+                "appInfo.feature3.desc": "Testez les mécanismes de sécurité des données de l'application, vérifiez les mesures de protection de la vie privée pour garantir la sécurité des données utilisateur.",
+                "appInfo.feature4.title": "Tests de Stabilité Fonctionnelle",
+                "appInfo.feature4.desc": "Testez la stabilité de diverses fonctionnalités, découvrez et signalez les problèmes potentiels pour nous aider à perfectionner notre produit.",
+                
+                // Testing Process
+                "process.title": "Rejoignez Notre Programme de Test en 4 Étapes Simples",
+                "process.subtitle": "Commencez à expérimenter la technologie IA de pointe et à gagner des récompenses en quelques minutes",
+                "process.step1.title": "Téléchargez l'App",
+                "process.step1.desc": "Téléchargez l'application de test Lumi AI gratuitement via Google Play Store",
+                "process.step2.title": "Créez un Compte",
+                "process.step2.desc": "Complétez l'inscription simple dans l'application pour rejoindre le programme de test logiciel IA",
+                "process.step3.title": "Participez aux Tests",
+                "process.step3.desc": "Expérimentez diverses fonctionnalités selon les directives de test et enregistrez les résultats",
+                "process.step4.title": "Gagnez des Récompenses",
+                "process.step4.desc": "Terminez les tâches de test pour gagner des récompenses exclusives et l'accès aux fonctionnalités premium",
+                
+                // Test Incentives
+                "incentives.title": "Récompenses de Test Exclusives",
+                "incentives.subtitle": "Participez aux tests logiciels et gagnez des incitations et privilèges exclusifs",
+                "incentives.card1.title": "Badges d'Accomplissement de Test",
+                "incentives.card1.desc": "Terminez différentes phases de test pour gagner des badges d'accomplissement exclusifs montrant vos contributions aux tests.",
+                "incentives.card2.title": "Accès aux Fonctionnalités Premium",
+                "incentives.card2.desc": "Obtenez un accès prioritaire aux fonctionnalités premium de la plateforme et expérimentez la dernière technologie IA.",
+                "incentives.card3.title": "Classement par Contribution aux Tests",
+                "incentives.card3.desc": "Gagnez un classement par contribution basé sur la qualité et la quantité des tests pour devenir un testeur de premier plan.",
+                
+                // Security Section
+                "security.title": "Garantie de Sécurité et Fiabilité",
+                "security.subtitle": "Votre sécurité et vie privée sont nos priorités absolues",
+                "security.badge1.title": "Approuvé par Google Play",
+                "security.badge1.desc": "L'application a passé le processus d'examen strict de Google garantissant l'absence de code malveillant",
+                "security.badge2.title": "Protection de la Vie Privée des Données",
+                "security.badge2.desc": "Aucune collecte de données utilisateur, stricte adhérence aux politiques de confidentialité des données",
+                "security.badge3.title": "Chiffrement des Données de Test",
+                "security.badge3.desc": "Toute transmission de données de test est chiffrée garantissant la sécurité des informations",
+                
+                // FAQ Section
+                "faq.title": "Questions Fréquemment Posées",
+                "faq.subtitle": "Questions courantes sur notre programme de test logiciel IA",
+                "faq.q1": "Le programme de test logiciel est-il complètement gratuit ?",
+                "faq.a1": "Oui, le programme de test logiciel est complètement gratuit. Vous avez juste besoin de télécharger l'application gratuitement via Google Play Store, vous inscrire pour rejoindre le programme de test et commencer à expérimenter la technologie IA tout en gagnant des récompenses.",
+                "faq.q2": "Comment gagner des récompenses de test ?",
+                "faq.a2": "Vous pouvez gagner des récompenses de test en complétant des tâches de test spécifiées. Ces incitations incluent des badges d'accomplissement exclusifs, l'accès aux fonctionnalités premium et le classement par contribution aux tests.",
+                "faq.q3": "L'application est-elle sûre et fiable ?",
+                "faq.a3": "Oui, Lumi AI a passé l'examen officiel de Google Play Store et ne collecte aucune donnée utilisateur. Nous adhérons strictement aux politiques de confidentialité des données pour protéger la sécurité des informations utilisateur.",
+                "faq.q4": "Quelles sont les exigences d'appareil nécessaires pour les tests logiciels ?",
+                "faq.a4": "Vous avez seulement besoin d'un smartphone Android pour participer. L'application est conçue pour être légère, ne consommera pas excessivement les ressources de l'appareil et ne nécessite pas d'exécution en arrière-plan.",
+                "faq.q5": "Comment rejoindre le programme de test logiciel ?",
+                "faq.a5": "Téléchargez simplement l'application Lumi AI et complétez l'inscription simple dans l'application pour rejoindre le programme de test logiciel. Le processus d'inscription est complètement gratuit et rapide.",
+                
+                // Call to Action
+                "cta.urgency": "OFFRE À DURÉE LIMITÉE",
+                "cta.title": "Rejoignez le Programme de Test IA Aujourd'hui !",
+                "cta.subtitle": "Téléchargez l'application gratuitement, commencez à expérimenter la technologie IA de pointe et gagnez des récompenses de test exclusives ! Notre application est approuvée par Google et 100% sécurisée.",
+                "cta.downloadBtn": "Télécharger depuis Google Play",
+                "cta.footer": "Rejoignez des milliers de testeurs dans le monde - Ne manquez pas ça !",
+                
+                // Footer
+                "footer.home": "Accueil",
+                "footer.app": "Infos App",
+                "footer.process": "Processus de Test",
+                "footer.rewards": "Récompenses",
+                "footer.support": "Support",
+                "footer.faq": "FAQ",
+                "footer.contact": "Contactez-nous",
+                "footer.terms": "Conditions d'Utilisation",
+                "footer.privacy": "Politique de Confidentialité",
+                "footer.download": "Télécharger l'App",
+                "footer.developer": "Développeur: Theflickson Limited"
+            },
+            pt: {
+                // Navigation
+                "nav.home": "Início",
+                "nav.app": "Informações do App",
+                "nav.process": "Processo de Teste",
+                "nav.rewards": "Recompensas",
+                "nav.security": "Segurança",
+                "nav.faq": "Perguntas Frequentes",
+                
+                // Hero Section
+                "hero.title": "Junte-se ao Programa de Testadores de Software Lumi AI",
+                "hero.subtitle": "Experimente tecnologia IA de última geração, participe de testes de computação distribuída e ganhe recompensas exclusivas",
+                "hero.benefit1": "Junte-se de qualquer lugar do mundo",
+                "hero.benefit2": "Baixe e teste para ganhar recompensas",
+                "hero.benefit3": "100% seguro e aprovado pelo Google Play",
+                "hero.downloadBtn": "Baixe Agora e Comece a Ganhar",
+                "hero.disclaimer": "Este é um programa de teste de software, não um plano de investimento. As recompensas são baseadas na participação e contribuições de teste.",
+                "hero.urgency": "Vagas limitadas - Junte-se hoje!",
+                
+                // App Info Section
+                "appInfo.title": "Sobre a Plataforma de Teste Lumi AI",
+                "appInfo.subtitle": "Plataforma revolucionária de computação IA que permite experimentar tecnologia IA distribuída de ponta",
+                "appInfo.downloadBtn": "Baixar do Google Play",
+                "appInfo.feature1.title": "Testes de Computação IA Distribuída",
+                "appInfo.feature1.desc": "Participe de testes de modelos IA distribuídos de próxima geração, experimente tecnologia de ponta sem operações complexas necessárias.",
+                "appInfo.feature2.title": "Testes de Otimização de Desempenho",
+                "appInfo.feature2.desc": "Teste o desempenho de computação IA em diferentes dispositivos para nos ajudar a otimizar a eficiência do algoritmo e melhorar a experiência do usuário.",
+                "appInfo.feature3.title": "Testes de Privacidade e Segurança",
+                "appInfo.feature3.desc": "Teste os mecanismos de segurança de dados do aplicativo, verifique as medidas de proteção de privacidade para garantir a segurança dos dados do usuário.",
+                "appInfo.feature4.title": "Testes de Estabilidade Funcional",
+                "appInfo.feature4.desc": "Teste a estabilidade de vários recursos, descubra e relate problemas potenciais para nos ajudar a aperfeiçoar nosso produto.",
+                
+                // Testing Process
+                "process.title": "Junte-se ao Nosso Programa de Teste em 4 Passos Simples",
+                "process.subtitle": "Comece a experimentar tecnologia IA de ponta e a ganhar recompensas em apenas minutos",
+                "process.step1.title": "Baixe o App",
+                "process.step1.desc": "Baixe o aplicativo de teste Lumi AI gratuitamente via Google Play Store",
+                "process.step2.title": "Registre sua Conta",
+                "process.step2.desc": "Complete o registro simples no aplicativo para ingressar no programa de teste de software IA",
+                "process.step3.title": "Participe dos Testes",
+                "process.step3.desc": "Experimente vários recursos de acordo com as diretrizes de teste e registre os resultados",
+                "process.step4.title": "Ganhe Recompensas",
+                "process.step4.desc": "Complete tarefas de teste para ganhar recompensas exclusivas e acesso a recursos premium",
+                
+                // Test Incentives
+                "incentives.title": "Recompensas de Teste Exclusivas",
+                "incentives.subtitle": "Participe de testes de software e ganhe incentivos e privilégios exclusivos",
+                "incentives.card1.title": "Emblemas de Conquista em Testes",
+                "incentives.card1.desc": "Complete diferentes fases de teste para ganhar emblemas de conquista exclusivos mostrando suas contribuições em testes.",
+                "incentives.card2.title": "Acesso a Recursos Premium",
+                "incentives.card2.desc": "Obtenha acesso prioritário a recursos premium da plataforma e experimente a mais recente tecnologia IA.",
+                "incentives.card3.title": "Classificação por Contribuição em Testes",
+                "incentives.card3.desc": "Ganhe classificação por contribuição baseada na qualidade e quantidade de testes para se tornar um testador de destaque.",
+                
+                // Security Section
+                "security.title": "Garantia de Segurança e Confiabilidade",
+                "security.subtitle": "Sua segurança e privacidade são nossas principais prioridades",
+                "security.badge1.title": "Aprovado pelo Google Play",
+                "security.badge1.desc": "O aplicativo passou pelo processo rigoroso de revisão do Google garantindo nenhum código malicioso",
+                "security.badge2.title": "Proteção de Privacidade de Dados",
+                "security.badge2.desc": "Sem coleta de dados do usuário, estrita adesão às políticas de privacidade de dados",
+                "security.badge3.title": "Criptografia de Dados de Teste",
+                "security.badge3.desc": "Toda transmissão de dados de teste é criptografada garantindo a segurança das informações",
+                
+                // FAQ Section
+                "faq.title": "Perguntas Frequentes",
+                "faq.subtitle": "Perguntas comuns sobre nosso programa de teste de software IA",
+                "faq.q1": "O programa de teste de software é completamente gratuito?",
+                "faq.a1": "Sim, o programa de teste de software is completamente gratuito. Você só precisa baixar o aplicativo gratuitamente via Google Play Store, registrar-se para ingressar no programa de teste e começar a experimentar a tecnologia IA enquanto ganha recompensas.",
+                "faq.q2": "Como ganho recompensas de teste?",
+                "faq.a2": "Você pode ganhar recompensas de teste completando tarefas de teste especificadas. Esses incentivos incluem emblemas de conquista exclusivos, acesso a recursos premium e classificação por contribuição em testes.",
+                "faq.q3": "O aplicativo é seguro e confiável?",
+                "faq.a3": "Sim, Lumi AI passou pela revisão oficial da Google Play Store e não coleta nenhum dado do usuário. Aderimos estritamente às políticas de privacidade de dados para proteger a segurança das informações do usuário.",
+                "faq.q4": "Quais requisitos de dispositivo são necessários para testes de software?",
+                "faq.a4": "Você só precisa de um smartphone Android para participar. O aplicativo é projetado para ser leve, não consumirá excessivamente os recursos do dispositivo e não requer execução em segundo plano.",
+                "faq.q5": "Como me inscrevo no programa de teste de software?",
+                "faq.a5": "Simplesmente baixe o aplicativo Lumi AI e complete o registro simples dentro do aplicativo para ingressar no programa de teste de software. O processo de registro é completamente gratuito e rápido.",
+                
+                // Call to Action
+                "cta.urgency": "OFERTA POR TEMPO LIMITADO",
+                "cta.title": "Junte-se ao Programa de Teste de IA Hoje!",
+                "cta.subtitle": "Baixe o aplicativo gratuitamente, comece a experimentar tecnologia IA de ponta e ganhe recompensas de teste exclusivas! Nosso aplicativo é aprovado pelo Google e 100% seguro.",
+                "cta.downloadBtn": "Baixar do Google Play",
+                "cta.footer": "Junte-se a milhares de testadores em todo o mundo - Não perca!",
+                
+                // Footer
+                "footer.home": "Início",
+                "footer.app": "Informações do App",
+                "footer.process": "Processo de Teste",
+                "footer.rewards": "Recompensas",
+                "footer.support": "Suporte",
+                "footer.faq": "Perguntas Frequentes",
+                "footer.contact": "Contate-nos",
+                "footer.terms": "Termos de Serviço",
+                "footer.privacy": "Política de Privacidade",
+                "footer.download": "Baixar App",
+                "footer.developer": "Desenvolvedor: Theflickson Limited"
+            }
+        };
+
+        // Language management
+        let currentLang = 'en';
+
+        // Function to set language
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update language selector
+            document.getElementById('currentLanguage').textContent = 
+                lang === 'en' ? 'English' : 
+                lang === 'es' ? 'Español' : 
+                lang === 'fr' ? 'Français' : 'Português';
+            
+            // Update active language option
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                    option.innerHTML = `<i class="fas fa-check"></i><span>${option.textContent}</span>`;
+                } else {
+                    option.classList.remove('active');
+                    option.innerHTML = `<span>${option.textContent}</span>`;
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Function to detect user language
+        function detectUserLanguage() {
+            // Check for saved preference first
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && translations[savedLang]) {
+                return savedLang;
+            }
+            
+            // Detect browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            const primaryLang = browserLang.split('-')[0];
+            
+            // Return detected language if available, otherwise default to English
+            return translations[primaryLang] ? primaryLang : 'en';
+        }
+
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', function() {
+            const userLang = detectUserLanguage();
+            setLanguage(userLang);
+            
+            // Language selector toggle
+            document.getElementById('languageBtn').addEventListener('click', function() {
+                document.getElementById('languageDropdown').classList.toggle('active');
+            });
+            
+            // Language option selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    document.getElementById('languageDropdown').classList.remove('active');
+                });
+            });
+            
+            // Close language dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.language-selector')) {
+                    document.getElementById('languageDropdown').classList.remove('active');
+                }
+            });
+        });
+
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
@@ -1286,58 +1885,6 @@
             currentSlide = (currentSlide + 1) % slides.length;
             updateCarousel();
         }, 5000);
-        
-        // Google Analytics event tracking for download buttons
-        document.querySelectorAll('.download-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const downloadUrl = this.href;
-                
-                // Send Google Analytics event
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'download_click', {
-                        'event_category': 'engagement',
-                        'event_label': 'Lumi AI Download',
-                        'value': 1
-                    });
-                }
-                
-                // Wait 300ms to ensure event is sent, then open download link
-                setTimeout(function() {
-                    window.open(downloadUrl, '_blank');
-                }, 300);
-            });
-        });
-        
-        // Alternative tracking for other analytics platforms
-        function trackConversion(eventName) {
-            // Google Analytics 4
-            if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, {
-                    'event_category': 'conversion',
-                    'event_label': 'Lumi AI Tester Program',
-                    'value': 1
-                });
-            }
-            
-            // Facebook Pixel (if available)
-            if (typeof fbq !== 'undefined') {
-                fbq('track', eventName);
-            }
-            
-            // Custom conversion tracking
-            console.log('Conversion tracked: ' + eventName);
-        }
-    </script>
-    
-    <!-- Google Analytics tracking code (replace with your actual tracking ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
     </script>
 </body>
 </html>
